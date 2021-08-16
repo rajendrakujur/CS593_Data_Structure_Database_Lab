@@ -3,9 +3,15 @@
 #include <stdio.h>
 #include <limits.h>
 
+int tree_height[] = {10, 18, 2, 37, 18, 26, 13};
+int required_wood = 30;
+
 // function will return maximum machine height to obtain the required wood
-int maxHeightMachine(int tree_height[], int number_of_trees, int required_wood)
+int maxHeightMachine()
 {
+    int number_of_trees;
+    number_of_trees = sizeof(tree_height) / sizeof(int);
+
     // to iterate over tree
     int tree_index;
     // intialized max height to the lowest value possible
@@ -48,26 +54,6 @@ int maxHeightMachine(int tree_height[], int number_of_trees, int required_wood)
 // main function
 int main()
 {
-    int number_of_trees;
-    printf("Enter number of trees : ");
-    scanf("%d", &number_of_trees);
-
-    //  array named tree_height of size number_of_trees
-    int tree_height[number_of_trees];
-    // to iterate over tree_height
-    int tree_index;
-
-    // input from user
-    for (tree_index = 0; tree_index < number_of_trees; tree_index++)
-    {
-        scanf("%d", &tree_height[tree_index]);
-    }
-
-    // prompts the user for required wood
-    int required_wood;
-    printf("Required wood : ");
-    scanf("%d", &required_wood);
-
-    printf("R : %d", maxHeightMachine(tree_height, number_of_trees, required_wood));
+    printf("R : %d", maxHeightMachine());
     return 0;
 }
