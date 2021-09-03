@@ -91,7 +91,7 @@ void printList(struct SingleLinkedList *list)
 // main function execution begins here
 int main()
 {
-    // declaration of list_1
+    // declaration of List
     struct SingleLinkedList *head;
     head = NULL;
 
