@@ -249,6 +249,7 @@ void printList(struct DoublyLinkedList *head)
 // main function execution begins here
 int main()
 {
+    // declaration of list
     struct DoublyLinkedList *head;
     head = NULL;
 
