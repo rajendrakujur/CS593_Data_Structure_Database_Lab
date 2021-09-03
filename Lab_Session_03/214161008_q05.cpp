@@ -130,9 +130,11 @@ char playGame(struct CircularList *head, int k)
 int main()
 {
     int length = 0, k = 0;
+
     cout << "Enter List Length : ";
     cin >> length;
 
+    // declaration of list
     struct CircularList *head;
     head = NULL;
 
