@@ -360,7 +360,6 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-
 	(8)	Give inputs accordingly
 		Output: output the list after performing operation
 
@@ -428,29 +427,183 @@
                 Output : 
                 3 -> 1 -> 9 -> 4 -> 6 -> 2 -> 0 -> NULL
 
-		Steps to run : g++ 214161008_q10.cpp -o 214161008_q10 && ./214161008_q10
+		Steps to run : g++ 214161008_q12.cpp -o 214161008_q12 && ./214161008_q12
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    (12) Give inputs accordingly
+    (14) Give inputs accordingly
 		 Output: output the list after performing operation
 
 		Example :
         Sequence of Execution 
 
-            Console : Enter length :
-            Input : 7
-            Console : Enter List elements :
-            Input : 1 3 9 4 2 6 0
-            Console : Given Linked List : 
-                1 -> 3 -> 9 -> 4 -> 2 -> 6 -> 0 -> NULL
-                Enter valid n : 
-            Input : 2
+            Console : 
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice : 
+            Input : 1
+            Console : Insert element (Integer): 
+            Input : 1
+
+            Console : Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
 
             Console :
-                Output : 
-                3 -> 1 -> 9 -> 4 -> 6 -> 2 -> 0 -> NULL
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice :
+            Input : 1
+            Console : Insert element (Integer):
+            Input : 2
 
-		Steps to run : g++ 214161008_q10.cpp -o 214161008_q10 && ./214161008_q10
+            Console : Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
+
+            Console : 
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice :
+            Input : 1
+            Console : Insert element (Integer):
+            Input : 3
+            Console : Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
+            Console :
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice : 1
+                Insert element (Integer):
+            Input : 4
+            Console : Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
+            Console :
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice :
+            Input : 3
+
+            Console :
+                NULL <- 1 <=> 2 <=> 3 <=> 4 -> NULL
+                Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
+            Console : 
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice :
+            Input : 4
+            Console :
+                NULL <- 4 <=> 3 <=> 2 <=> 1 -> NULL
+                Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
+            Console :
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice : 2
+                Enter number to delete :
+            Input : 3
+            Console :
+                Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
+            Console :
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice :
+            Input : 3
+            Console : 
+                NULL <- 1 <=> 2 <=> 4 -> NULL
+                Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 1
+            Console : 
+                1.Insert Element(integer) 
+                2.Delete Element
+                3.Print in Ascending order.
+                4.Print in Descending order.
+                Enter choice :
+            Input : 4
+            Console :
+                NULL <- 4 <=> 2 <=> 1 -> NULL
+                Do you want to continue? 0(for no) 1 or any other(for yes) :
+            Input : 0
+
+
+		Steps to run : g++ 214161008_q14.cpp -o 214161008_q14 && ./214161008_q14
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    (15) Give inputs accordingly
+		 Output: output the list after performing operation
+
+		Example :
+        Sequence of Execution 
+
+            Console: 
+                1.Add another number
+                2.Get number at index
+                3.Print List
+                Any other Exit.
+            Input : 1
+            Console : Enter number to add:
+            Input : 20
+            Console : 
+                --------------------------------------------------------------------------
+                1.Add another number
+                2.Get number at index
+                3.Print List
+                Any other Exit.
+            Input : 1
+            Console : Enter number to add:
+            Input : 65
+            Console : 
+                --------------------------------------------------------------------------
+                1.Add another number
+                2.Get number at index
+                3.Print List
+                Any other Exit.
+            Input : 1
+            Console : Enter number to add:
+            Input : 98
+            Console : 
+                --------------------------------------------------------------------------
+                1.Add another number
+                2.Get number at index
+                3.Print List
+                Any other Exit.
+            Input : 3
+            Console : 20 -> 65 -> 98 -> NULL
+                --------------------------------------------------------------------------
+                1.Add another number
+                2.Get number at index
+                3.Print List
+                Any other Exit.
+            Input : 2
+
+            Console : Enter valid index (0-based Indexing): 1
+
+                Address : 0x55b6af25c6f0	having Data : 65
+                --------------------------------------------------------------------------
+                1.Add another number
+                2.Get number at index
+                3.Print List
+                Any other Exit.
+            Input : 0
+
+
+		Steps to run : g++ 214161008_q15.cpp -o 214161008_q15 && ./214161008_q15
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
