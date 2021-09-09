@@ -60,52 +60,110 @@ void printList(struct SingleLinkedList *list)
 // function that sorts the list elements
 struct SingleLinkedList *sort(struct SingleLinkedList *list)
 {
-    int count_zero = 0;
-    int count_one = 0;
-    int count_two = 0;
+    struct SingleLinkedList *result;
+    result = NULL;
 
-    // traverse list till list becomes and update respective counts if that number appears
-    while (list)
+    if (!list)
     {
+        cout << "\nList is empty nothing to sort.";
+        return result;
+    }
+
+    // to store the next address temporarily
+    struct SingleLinkedList *next;
+    next = NULL;
+
+    // to store the address of node to be added in the result temporarily
+    struct SingleLinkedList *temp_node;
+    temp_node = NULL;
+
+    // to traverse the list
+    struct SingleLinkedList *traverse;
+    traverse = list;
+
+    // traverse and scan for zero
+    while (traverse)
+    {
+        // if zero encountered in the head then update head node itself
         if (list->data == 0)
         {
-            count_zero++;
+            temp_node = list;
+            next = list->next;
+            temp_node->next = NULL;
+            list = next;
+            addEnd(result, temp_node);
+            traverse = list;
         }
-        else if (list->data == 1)
+        // else if next node's data is zero then do updation of pointers
+        else if (traverse->next && traverse->next->data == 0)
         {
-            count_one++;
+            temp_node = traverse->next;
+            next = traverse->next->next;
+            temp_node->next = NULL;
+            addEnd(result, temp_node);
+            traverse->next = next;
         }
-        else if (list->data == 2)
+        else
         {
-            count_two++;
+            traverse = traverse->next;
         }
-        list = list->next;
     }
+    traverse = list;
 
-    struct SingleLinkedList *result = NULL;
+    // traverse and scan for 1
+    while (traverse)
+    {
+        // if the head itself pointing to 1
+        if (list->data == 1)
+        {
+            temp_node = list;
+            next = list->next;
+            temp_node->next = NULL;
+            list = next;
+            addEnd(result, temp_node);
+            traverse = list;
+        }
+        // if the next node's data is 1 then update the pointers
+        else if (traverse->next && traverse->next->data == 1)
+        {
+            temp_node = traverse->next;
+            next = traverse->next->next;
+            temp_node->next = NULL;
+            addEnd(result, temp_node);
+            traverse->next = next;
+        }
+        else
+        {
+            traverse = traverse->next;
+        }
+    }
+    traverse = list;
 
-    // assign a new node at the end till count_zero becomes zero
-    while (count_zero)
+    // scan for data 2 or this step can be skiped and directly added list into the result
+    while (traverse)
     {
-        addEnd(result, createNode(0, NULL));
-        count_zero--;
-        continue;
+        if (list->data == 2)
+        {
+            temp_node = list;
+            next = list->next;
+            temp_node->next = NULL;
+            list = next;
+            addEnd(result, temp_node);
+            traverse = list;
+        }
+        else if (traverse->next && traverse->next->data == 2)
+        {
+            temp_node = traverse->next;
+            next = traverse->next->next;
+            temp_node->next = NULL;
+            addEnd(result, temp_node);
+            traverse->next = next;
+        }
+        else
+        {
+            traverse = traverse->next;
+        }
     }
-    // assign a new node at the end till count_one becomes zero
-    while (count_one)
-    {
-        addEnd(result, createNode(1, NULL));
-        count_one--;
-        continue;
-    }
-    // assign a new node at the end till count_two becomes zero
-    while (count_two)
-    {
-        addEnd(result, createNode(2, NULL));
-        count_two--;
-        continue;
-    }
-
     return result;
 }
 
@@ -125,10 +183,14 @@ int main()
     cout << "Enter Lists elements : ";
     while (length--)
     {
+        // cout << "Enter element : ";
         cin >> number;
         // create a node with number as data field and NULL as next field and add at the end of list_1
         addEnd(head, createNode(number, NULL));
+        // cout << "\nLength : " << length;
     }
+
+    cout << "\nInput over : ";
 
     // declare result to store the sorted list
     struct SingleLinkedList *result;
