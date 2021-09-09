@@ -190,8 +190,6 @@ int main()
         // cout << "\nLength : " << length;
     }
 
-    cout << "\nInput over : ";
-
     // declare result to store the sorted list
     struct SingleLinkedList *result;
     result = sort(head);
