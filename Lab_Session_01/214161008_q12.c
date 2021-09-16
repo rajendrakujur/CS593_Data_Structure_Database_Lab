@@ -22,8 +22,12 @@ bool checkHidden(char text[])
         {
             // calculate word length
             word_length = text_index - starting_index;
+            while (text[text_index] == ' ')
+            {
+                text_index++;
+            }
             // read word length from string
-            word_length_from_string = text[++text_index] - 48;
+            word_length_from_string = text[text_index] - 48;
 
             // if matches returns true
             if (word_length_from_string == word_length)
@@ -33,7 +37,10 @@ bool checkHidden(char text[])
             // else do updation to indices and set indices to the next words starting index
             else
             {
-                text_index += 2;
+                while (text[text_index] == ' ')
+                {
+                    text_index++;
+                }
                 starting_index = text_index;
             }
         }
@@ -53,10 +60,10 @@ int main()
     // function call to check whether hidden or not
     if (checkHidden(text))
     {
-        printf("Hidden");
+        printf("Hidden\n");
     }
     else
     {
-        printf("Not Hidden");
+        printf("Not Hidden\n");
     }
 }
