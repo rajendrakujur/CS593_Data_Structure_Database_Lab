@@ -9,7 +9,7 @@ int matrix[1000][1000];
 int numberOfPeaks(int matrix[][1000], int row, int column)
 {
     int total_peaks = 0;
-
+    bool flag = false;
     // traverse matrix
     for (int row_index = 1; row_index < row - 1; row_index++)
     {
@@ -24,15 +24,16 @@ int numberOfPeaks(int matrix[][1000], int row, int column)
                     {
                         if (matrix[row_index][column_index] > matrix[row_index + 1][column_index + 1])
                         {
-                            // cout << matrix[row_index][column_index] << endl;
-                            // cout << "\nTotal peaks ++";
                             total_peaks++;
+                            flag = true;
                         }
                     }
                 }
             }
         }
     }
+    if(!flag)
+        total_peaks = -1;
     return total_peaks;
 }
 
