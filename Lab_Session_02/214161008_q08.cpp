@@ -1,4 +1,5 @@
-/*Last update by RAJENDRA KUJUR (214161008) on 24-08-2021 at 19:33*/
+/*Last update by RAJENDRA KUJUR (214161008) on 16-09-2021 at 07:33*/
+/*Last update by RAJENDRA KUJUR (214161008) on 16-09-2021 at 07:33*/
 
 #include <iostream>
 using namespace std;
@@ -32,7 +33,7 @@ int numberOfPeaks(int matrix[][1000], int row, int column)
             }
         }
     }
-    if(!flag)
+    if (!flag)
         total_peaks = -1;
     return total_peaks;
 }
