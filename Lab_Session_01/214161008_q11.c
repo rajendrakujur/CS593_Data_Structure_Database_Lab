@@ -1,10 +1,22 @@
-// Last updated by Rajendra Kujur (214161008) on 15-08-2021 11:51 AM
+// Last updated by Rajendra Kujur (214161008) on 16-09-2021 07:35 PM
 
 #include <stdio.h>
 #include <limits.h>
+#include <stdbool.h>
 
 int tree_height[] = {10, 18, 2, 37, 18, 26, 13};
 int required_wood = 30;
+
+int totalWood()
+{
+    int total_wood = 0;
+    int number_of_trees = sizeof(tree_height) / sizeof(int);
+    for (int index = 0; index < number_of_trees; index++)
+    {
+        total_wood += tree_height[index];
+    }
+    return total_wood;
+}
 
 // function will return maximum machine height to obtain the required wood
 int maxHeightMachine()
@@ -31,6 +43,12 @@ int maxHeightMachine()
     // to store total wood obtained
     int obtained_wood = 0;
 
+    // if required wood is greateer than available wood then return -1
+    if (required_wood > totalWood())
+    {
+        return -1;
+    }
+
     // As soon as we get the required_wood >= obtained_wood the loop will terminate
     while (obtained_wood < required_wood)
     {
@@ -54,6 +72,10 @@ int maxHeightMachine()
 // main function
 int main()
 {
-    printf("R : %d", maxHeightMachine());
+    int height = maxHeightMachine();
+    if (height != -1)
+        printf("R : %d", height);
+    else
+        printf("Not enough available wood.");
     return 0;
 }
