@@ -1,0 +1,9 @@
+/home/
+/a/./b/../../c/
+/a/..
+/a/../
+/../../../../../a
+/a/./b/./c/./d/
+/a/../.././../../.
+/a//b//c//////d
+New_Volume/media/rajendra/New_Volume/Study/../IIT_GUWAHATI/.///////2021-Fall/CS593_Data_Structure_&_Database_Lab/Lab_Session_04/214161008_q07
