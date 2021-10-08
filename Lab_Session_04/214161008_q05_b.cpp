@@ -1,6 +1,7 @@
 /*Last update by RAJENDRA KUJUR (214161008) on 13-09-2021 at 13:44*/
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // structure definition for double linked list
@@ -63,19 +64,13 @@ void enqueueRear(struct DoublyLinkedList *&head, struct DoublyLinkedList *new_no
 }
 
 // function to delete a node from the beginning of the list
-void dequeueFront(struct DoublyLinkedList *&head)
+int dequeueFront(struct DoublyLinkedList *&head)
 {
-    // if length of list is 0 so delete operation can't be performed
-    if (!head)
-    {
-        cout << "\nLength of list = 0, So can't delete.";
-        return;
-    }
-
     // else make a delete_node that points to head
     struct DoublyLinkedList *delete_node;
     delete_node = head;
 
+    int return_value = delete_node->data;
     // if list is having more than one element then update head to its next node
     if (head->next)
     {
@@ -90,17 +85,12 @@ void dequeueFront(struct DoublyLinkedList *&head)
 
     // free the memory space
     free(delete_node);
+    return return_value;
 }
 
 // function to delete a node from the end
-void dequeueRear(struct DoublyLinkedList *&head)
+int dequeueRear(struct DoublyLinkedList *&head)
 {
-    if (!head)
-    {
-        cout << "\nLength of list = 0, So can't delete.";
-        return;
-    }
-
     struct DoublyLinkedList *delete_node;
     struct DoublyLinkedList *traverse;
 
@@ -113,7 +103,7 @@ void dequeueRear(struct DoublyLinkedList *&head)
 
     // Assign the last node to delete_node
     delete_node = traverse;
-
+    int return_value = delete_node->data;
     // if there is a node left after deleteing
     if (traverse->previous)
     {
@@ -127,6 +117,7 @@ void dequeueRear(struct DoublyLinkedList *&head)
 
     // free the memory
     free(delete_node);
+    return return_value;
 }
 
 // prints the list
@@ -140,9 +131,37 @@ void printList(struct DoublyLinkedList *head)
     cout << "NULL";
 }
 
-// main deleteFromBeginningfunction execution begins here
-int main()
+// takes a string convert it into integer and returns
+int stringToInteger(string str)
 {
+    int str_index = 0;
+
+    // to check the coefficient
+    int coefficient = 1;
+    if (str[str_index] == '-')
+    {
+        coefficient = -1;
+        str_index++;
+    }
+
+    int return_value = str[str_index++] - '0';
+
+    while (str[str_index] != '\0')
+    {
+        return_value *= 10;
+        return_value += str[str_index++] - '0';
+    }
+    return coefficient * return_value;
+}
+
+void readFile()
+{
+    ifstream fin;
+    fin.open("214161008_q05_b_input.txt");
+
+    ofstream fout;
+    fout.open("214161008_q05_b_output.txt");
+
     // declaration of list
     struct DoublyLinkedList *head;
     head = NULL;
@@ -150,56 +169,76 @@ int main()
     // few variable that will be required while performing operations
     int number;
     int choice;
+    string line;
 
     // Loop  will continue till the user wants
-    while (1)
+    while (!fin.eof())
     {
-        cout << "\n1.Insert node at the beginning.";
-        cout << "\n2.Insert node at the end.";
-        cout << "\n3.Delete node from beginning";
-        cout << "\n4.Delete node from end";
-        cout << "\nEnter choice : ";
-        cin >> choice;
+        fin >> line;
+        choice = stringToInteger(line);
 
         switch (choice)
         {
+        // enqueues element at the front of the dequeue
         case 1:
-            cout << "Enter number to insert : ";
-            cin >> number;
-
+            fin >> line;
+            number = stringToInteger(line);
             enqueueFront(head, createNode(number));
+            fout << "Enqueued (front) : " << number;
             break;
 
+        // enqueues element at the rear of the dequeue
         case 2:
-            cout << "Enter number to insert : ";
-            cin >> number;
-
+            fin >> line;
+            number = stringToInteger(line);
             enqueueRear(head, createNode(number));
+            fout << "Enqueued (rear) : " << number;
             break;
 
+        // dequeues an element from the front if queue wasn't empty
         case 3:
-            dequeueFront(head);
+            // if length of list is 0 so delete operation can't be performed
+            if (!head)
+            {
+                fout << "Dequeue is empty.";
+            }
+            else
+            {
+                number = dequeueFront(head);
+                fout << "Dequeued (front) : " << number;
+            }
             break;
 
+        // dequeues an element from the rear if queue wasn't empty
         case 4:
-            dequeueRear(head);
+            // if length of list is 0 so delete operation can't be performed
+            if (!head)
+            {
+                fout << "Dequeue is empty.";
+            }
+            else
+            {
+                number = dequeueRear(head);
+                fout << "Dequeued (front) : " << number;
+            }
             break;
 
         default:
-            continue;
+            fout << "Not a valid option.";
         }
-
-        cout << "\nUpdated List : ";
-        printList(head);
-
-        // ask the user whether s/he want to continue
-        cout << "\nDo you want to continue? 0(for no) 1 or any other(for yes) : ";
-        cin >> choice;
-
-        if (!choice)
-        {
-            break;
-        }
+        fout << endl;
     }
+
+    fin.close();
+    cout << "\nRead from file '214161008_q05_b_input.txt'.";
+    fout.close();
+    cout << "\nWritten to file '214161008_q05_b_input.txt'.";
+}
+
+// main deleteFromBeginningfunction execution begins here
+int main()
+{
+    readFile();
+    cout << endl;
     return 0;
 }
