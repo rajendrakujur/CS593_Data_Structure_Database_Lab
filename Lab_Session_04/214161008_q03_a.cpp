@@ -149,10 +149,10 @@ int stringToInteger(string str)
 void readFile()
 {
     ifstream fin;
-    fin.open("214161008_q03a_input.txt");
+    fin.open("214161008_q03_a_input.txt");
 
     ofstream fout;
-    fout.open("214161008_q03a_output.txt");
+    fout.open("214161008_q03_a_output.txt");
 
     // declare a stack s
     struct Stack s;
@@ -223,9 +223,9 @@ void readFile()
     }
 
     fin.close();
-    cout << "\nRead from file '214161008_q03a_input.txt'.";
+    cout << "\nRead from file '214161008_q03_a_input.txt'.";
     fout.close();
-    cout << "\nWritten to file '214161008_q03a_input.txt'.";
+    cout << "\nWritten to file '214161008_q03_a_input.txt'.";
 }
 
 // main function execution begins here
