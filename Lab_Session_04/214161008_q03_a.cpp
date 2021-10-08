@@ -1,6 +1,7 @@
 /*Last update by RAJENDRA KUJUR (214161008) on 13-09-2021 at 07:20*/
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // Queue structure
@@ -13,7 +14,7 @@ struct Queue
 };
 
 // stack structure since stack is to implemented using two queues
-struct stack
+struct Stack
 {
     struct Queue q1, q2;
 };
@@ -47,19 +48,12 @@ bool isFull(struct Queue q)
 // enqueues an element in the queue
 void enqueue(struct Queue &q, int number)
 {
-    if (!isFull(q))
+    if (isEmpty(q))
     {
-        if (isEmpty(q))
-        {
-            q.front = (q.front + 1) % q.size;
-        }
-        q.rear = (q.rear + 1) % q.size;
-        q.data[q.rear] = number;
+        q.front = (q.front + 1) % q.size;
     }
-    else
-    {
-        cout << "\nStack is Full.";
-    }
+    q.rear = (q.rear + 1) % q.size;
+    q.data[q.rear] = number;
 }
 
 // dequeues an element and returns
@@ -89,7 +83,7 @@ int dequeue(struct Queue &q)
 }
 
 // pushes number onto the stack
-void push(struct stack &s, int number)
+void push(struct Stack &s, int number)
 {
     enqueue(s.q1, number);
 }
@@ -103,7 +97,7 @@ void swap(struct Queue &q1, struct Queue &q2)
 }
 
 // pops and element from stack and returns the elements
-int pop(struct stack &s)
+int pop(struct Stack &s)
 {
     int return_value = -1;
 
@@ -128,11 +122,40 @@ int pop(struct stack &s)
     return return_value;
 }
 
-// main function execution begins here
-int main()
+// takes a string convert it into integer and returns
+int stringToInteger(string str)
 {
+    int str_index = 0;
+
+    // to check the coefficient
+    int coefficient = 1;
+    if (str[str_index] == '-')
+    {
+        coefficient = -1;
+        str_index++;
+    }
+
+    int return_value = str[str_index++] - '0';
+
+    while (str[str_index] != '\0')
+    {
+        return_value *= 10;
+        return_value += str[str_index++] - '0';
+    }
+    return coefficient * return_value;
+}
+
+// reads from file and perform operation and write the result into another file
+void readFile()
+{
+    ifstream fin;
+    fin.open("214161008_q03a_input.txt");
+
+    ofstream fout;
+    fout.open("214161008_q03a_output.txt");
+
     // declare a stack s
-    struct stack s;
+    struct Stack s;
 
     // intialize queues variable for the stack
     s.q1.front = -1;
@@ -141,38 +164,74 @@ int main()
     s.q2.front = -1;
     s.q2.rear = -1;
 
-    s.q1.size = 1000;
-    s.q2.size = 1000;
+    string line;
+    fin >> line;
+    s.q1.size = stringToInteger(line);
+    s.q2.size = 10000;
 
     int choice;
     int number;
 
-    while (1)
+    if (s.q1.size <= 0)
     {
-        cout << "1.Push\n2.Pop\n";
-        cin >> choice;
+        fout << "Stack can't accomodate any element.\n";
+        return;
+    }
+
+    // read till we reach the end of the file
+    while (!fin.eof())
+    {
+        fin >> line;
+        choice = stringToInteger(line);
+
         switch (choice)
         {
+        // reads the number and pushes to the stack
         case 1:
-            cout << "Enter number : ";
-            cin >> number;
-            push(s, number);
+            fin >> line;
+            number = stringToInteger(line);
+
+            // fout << "s.q1.front  " << s.q1.front << "s.q1.rear  " << s.q1.rear << endl;
+            ;
+            if (!isFull(s.q1))
+            {
+                push(s, number);
+                fout << "Pushed : " << number;
+            }
+            else
+            {
+                fout << "Stack is Full.";
+            }
             break;
+
+        // pops and print the element if stack wasn't empty
         case 2:
             number = pop(s);
             if (number == -1)
             {
-                cout << "Stack is empty.";
+                fout << "Stack is empty.";
             }
             else
             {
-                cout << "Popped number " << number;
+                fout << "Popped : " << number;
             }
             break;
         default:
-            return 0;
+            fout << "Not a valid option.";
         }
-        cout << endl;
+        fout << endl;
     }
+
+    fin.close();
+    cout << "\nRead from file '214161008_q03a_input.txt'.";
+    fout.close();
+    cout << "\nWritten to file '214161008_q03a_input.txt'.";
+}
+
+// main function execution begins here
+int main()
+{
+    readFile();
+    cout << endl;
     return 0;
 }
