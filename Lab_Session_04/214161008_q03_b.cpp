@@ -121,10 +121,10 @@ int stringToInteger(string str)
 void readFile()
 {
     ifstream fin;
-    fin.open("214161008_q03b_input.txt");
+    fin.open("214161008_q03_b_input.txt");
 
     ofstream fout;
-    fout.open("214161008_q03b_output.txt");
+    fout.open("214161008_q03_b_output.txt");
 
     // queue declaration
     struct Queue q;
@@ -189,9 +189,9 @@ void readFile()
         fout << endl;
     }
     fin.close();
-    std::cout << "\nRead from file '214161008_q03b_input.txt'.";
+    std::cout << "\nRead from file '214161008_q03_b_input.txt'.";
     fout.close();
-    std::cout << "\nWritten to file '214161008_q03b_input.txt'.";
+    std::cout << "\nWritten to file '214161008_q03_b_input.txt'.";
 }
 
 // main function execution begins here
