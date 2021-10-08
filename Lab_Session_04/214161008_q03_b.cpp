@@ -1,6 +1,7 @@
 /*Last update by RAJENDRA KUJUR (214161008) on 13-09-2021 at 07:50*/
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // Stack structure
@@ -46,14 +47,7 @@ bool isEmpty(struct Stack s)
 // pushes number onto the stack
 void push(struct Stack &s, int number)
 {
-    if (!isFull(s))
-    {
-        s.data[++s.top] = number;
-    }
-    else
-    {
-        cout << "Queue is full.";
-    }
+    s.data[++s.top] = number;
 }
 
 // pops an element from the stack and returns
@@ -101,47 +95,109 @@ int dequeue(struct Queue &q)
     return return_number;
 }
 
-// main function execution begins here
-int main()
+// takes a string convert it into integer and returns
+int stringToInteger(string str)
 {
+    int str_index = 0;
+
+    // to check the coefficient
+    int coefficient = 1;
+    if (str[str_index] == '-')
+    {
+        coefficient = -1;
+        str_index++;
+    }
+
+    int return_value = str[str_index++] - '0';
+
+    while (str[str_index] != '\0')
+    {
+        return_value *= 10;
+        return_value += str[str_index++] - '0';
+    }
+    return coefficient * return_value;
+}
+
+void readFile()
+{
+    ifstream fin;
+    fin.open("214161008_q03b_input.txt");
+
+    ofstream fout;
+    fout.open("214161008_q03b_output.txt");
+
     // queue declaration
     struct Queue q;
 
     // initializing stack parameters for the queue
     q.s1.top = -1;
     q.s2.top = -1;
-    q.s1.size = 1000;
+
+    string line;
+    fin >> line;
+    q.s1.size = stringToInteger(line);
     q.s2.size = 1000;
 
     int choice;
     int number;
 
-    while (1)
+    if (q.s1.size <= 0)
     {
-        cout << "1.Enqueue\n2.Dequeue\nAny other to exit\n";
-        cin >> choice;
+        fout << "Queue can't accomodate any element.\n";
+        return;
+    }
+
+    // read till we reach the end of the file
+    while (!fin.eof())
+    {
+        fin >> line;
+        choice = stringToInteger(line);
 
         switch (choice)
         {
+
+        // reads the number and enqueues to the queue
         case 1:
-            cout << "Enter number : ";
-            cin >> number;
-            enqueue(q, number);
+            fin >> line;
+            number = stringToInteger(line);
+
+            if (!isFull(q.s1))
+            {
+                enqueue(q, number);
+                fout << "Enqueued  " << number;
+            }
+            else
+            {
+                fout << "Queue is full.";
+            }
             break;
+        // dequeues an element from the queue and prints if queue wasn't empty
         case 2:
             number = dequeue(q);
             if (number == -1)
             {
-                cout << "Queue is empty.";
+                fout << "Queue is empty.";
             }
             else
             {
-                cout << "\nDequeued number " << number;
+                fout << "Dequeued number " << number;
             }
             break;
         default:
-            return 0;
+            fout << "Not a valid option.";
         }
+        fout << endl;
     }
+    fin.close();
+    std::cout << "\nRead from file '214161008_q03b_input.txt'.";
+    fout.close();
+    std::cout << "\nWritten to file '214161008_q03b_input.txt'.";
+}
+
+// main function execution begins here
+int main()
+{
+    readFile();
+    std::cout << endl;
     return 0;
 }
