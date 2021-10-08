@@ -147,6 +147,7 @@ void readFile()
         return;
     }
 
+    fout << "Sequence of Execution : \n";
     // read till we reach the end of the file
     while (!fin.eof())
     {
@@ -191,7 +192,7 @@ void readFile()
     fin.close();
     std::cout << "\nRead from file '214161008_q03_b_input.txt'.";
     fout.close();
-    std::cout << "\nWritten to file '214161008_q03_b_input.txt'.";
+    std::cout << "\nWritten to file '214161008_q03_b_output.txt'.";
 }
 
 // main function execution begins here

@@ -232,7 +232,7 @@ void readFile()
     fin.close();
     cout << "\nRead from file '214161008_q05_b_input.txt'.";
     fout.close();
-    cout << "\nWritten to file '214161008_q05_b_input.txt'.";
+    cout << "\nWritten to file '214161008_q05_b_output.txt'.";
 }
 
 // main deleteFromBeginningfunction execution begins here

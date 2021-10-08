@@ -209,6 +209,7 @@ int findMatchingIndex(struct Process p[], int process_id, int number_of_processe
             return index;
         }
     }
+    return -1;
 }
 
 // completes the process execution in round robin fashion

@@ -1,2 +1,2 @@
 Number_of_frames : 4
-Reference_Strng : 7 0 1 2 0 3 0 4 2 3 0 3 2 3
+Reference_String : 7 0 1 2 0 3 0 4 2 3 0 3 2 3

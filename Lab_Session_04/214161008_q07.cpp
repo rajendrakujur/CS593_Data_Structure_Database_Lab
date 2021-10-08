@@ -157,7 +157,7 @@ void readFile()
     fin.close();
     cout << "\nRead from file '214161008_q07_input.txt'.";
     fout.close();
-    cout << "\nWritten to file '214161008_q07_input.txt'.";
+    cout << "\nWritten to file '214161008_q07_output.txt'.";
 }
 
 // main function execution begins here

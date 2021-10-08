@@ -177,7 +177,7 @@ void readFile()
         fout << "Stack can't accomodate any element.\n";
         return;
     }
-
+    fout << "Sequence of Execution : \n";
     // read till we reach the end of the file
     while (!fin.eof())
     {
@@ -223,15 +223,15 @@ void readFile()
     }
 
     fin.close();
-    cout << "\nRead from file '214161008_q03_a_input.txt'.";
+    std::cout << "\nRead from file '214161008_q03_a_input.txt'.";
     fout.close();
-    cout << "\nWritten to file '214161008_q03_a_input.txt'.";
+    std::cout << "\nWritten to file '214161008_q03_a_output.txt'.";
 }
 
 // main function execution begins here
 int main()
 {
     readFile();
-    cout << endl;
+    std::cout << endl;
     return 0;
 }
