@@ -1,0 +1,7 @@
+TimeQuantum : 3
+ProcessID   ArrivalTime   BurstTime
+___________________________________
+1               0               4
+2               0               5
+3               0               6
+4               0               7
