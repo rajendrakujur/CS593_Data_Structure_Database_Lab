@@ -1,6 +1,7 @@
 /*Last update by RAJENDRA KUJUR (214161008) on 13-09-2021 at 15:36*/
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 // structure of Deuque
@@ -41,55 +42,41 @@ bool isEmpty(struct Dequeue q)
 // enqueues an element at the front of the queue
 void enqueueFront(struct Dequeue &q, int number)
 {
-    if (isFull(q))
+    // if queue is empty i.e. the incoming number will be the first one then update both
+    if (isEmpty(q))
     {
-        cout << "\nQueue is Full.";
+        q.rear = (q.rear + 1) % q.size;
+        q.front = (q.front + 1) % q.size;
     }
+    // other wise update only front
     else
     {
-        // if queue is empty i.e. the incoming number will be the first one then update both
-        if (isEmpty(q))
-        {
-            q.rear = (q.rear + 1) % q.size;
-            q.front = (q.front + 1) % q.size;
-        }
-        // other wise update only front
-        else
-        {
-            q.front = (q.front - 1) % q.size;
-        }
-        // if front is pointing to negative index then add dequeue size so that it becomes circular
-        if (q.front < 0)
-        {
-            q.front += q.size;
-        }
-        q.data[q.front] = number;
+        q.front = (q.front - 1) % q.size;
     }
+    // if front is pointing to negative index then add dequeue size so that it becomes circular
+    if (q.front < 0)
+    {
+        q.front += q.size;
+    }
+    q.data[q.front] = number;
 }
 
 // enqueues an element at the rear of the queue
 void enqueueRear(struct Dequeue &q, int number)
 {
-    if (isFull(q))
+    // if queue is empty i.e. the incoming number will be the first one then update both
+    if (isEmpty(q))
     {
-        cout << "\nQueue is Full.";
+        q.rear = (q.rear + 1) % q.size;
+        q.front = (q.front + 1) % q.size;
     }
+
+    // other wise update only rear
     else
     {
-        // if queue is empty i.e. the incoming number will be the first one then update both
-        if (isEmpty(q))
-        {
-            q.rear = (q.rear + 1) % q.size;
-            q.front = (q.front + 1) % q.size;
-        }
-
-        // other wise update only rear
-        else
-        {
-            q.rear = (q.rear + 1) % q.size;
-        }
-        q.data[q.rear] = number;
+        q.rear = (q.rear + 1) % q.size;
     }
+    q.data[q.rear] = number;
 }
 
 // dequeueue an element from the front and returns
@@ -152,9 +139,37 @@ int dequeueRear(struct Dequeue &q)
     return return_value;
 }
 
-// main function execution begins here
-int main()
+// takes a string convert it into integer and returns
+int stringToInteger(string str)
 {
+    int str_index = 0;
+
+    // to check the coefficient
+    int coefficient = 1;
+    if (str[str_index] == '-')
+    {
+        coefficient = -1;
+        str_index++;
+    }
+
+    int return_value = str[str_index++] - '0';
+
+    while (str[str_index] != '\0')
+    {
+        return_value *= 10;
+        return_value += str[str_index++] - '0';
+    }
+    return coefficient * return_value;
+}
+
+void readFile()
+{
+    ifstream fin;
+    fin.open("214161008_q05_a_input.txt");
+
+    ofstream fout;
+    fout.open("214161008_q05_a_output.txt");
+
     struct Dequeue q;
     q.front = -1;
     q.rear = -1;
@@ -162,73 +177,99 @@ int main()
     // temporaries we will need later
     int number;
     int choice;
+    string line;
 
-    cout << "Enter Dequeue size : ";
-    cin >> q.size;
+    fin >> line;
+    q.size = stringToInteger(line);
+
+    if (q.size <= 0)
+    {
+        fout << "Can't accomodate any elements.\n";
+        return;
+    }
 
     // Loop  will continue till the user wants
-    while (1)
+    while (!fin.eof())
     {
-        cout << "\n1.Enqueue number at front.";
-        cout << "\n2.Enqueue number at the end.";
-        cout << "\n3.Dequeue from front";
-        cout << "\n4.Dequeue from end";
-        cout << "\nEnter choice : ";
-        cin >> choice;
+        fin >> line;
+        choice = stringToInteger(line);
 
         switch (choice)
         {
+        // enqueues element at the front of the dequeue
         case 1:
-            cout << "Enter number to enqueue : ";
-            cin >> number;
+            fin >> line;
+            number = stringToInteger(line);
 
-            enqueueFront(q, number);
+            if (isFull(q))
+            {
+                fout << "Dequeue is Full.";
+            }
+            else
+            {
+                enqueueFront(q, number);
+                fout << "Enqueued (front) : " << number;
+            }
             break;
 
+        // enqueues element at the rear of the dequeue
         case 2:
-            cout << "Enter number to enqueue : ";
-            cin >> number;
+            fin >> line;
+            number = stringToInteger(line);
 
-            enqueueRear(q, number);
+            if (isFull(q))
+            {
+                fout << "Dequeue is Full.";
+            }
+            else
+            {
+                enqueueRear(q, number);
+                fout << "Enqueued (rear) : " << number;
+            }
             break;
 
+        // dequeues an element from the front if queue wasn't empty
         case 3:
             number = dequeueFront(q);
             if (number != -1)
             {
-                cout << "Dequeued element : " << number;
+                fout << "Dequeued (front) : " << number;
             }
             else
             {
-                cout << "Dequeue is empty.";
+                fout << "Dequeue is empty.";
             }
             break;
 
+        // dequeues an element from the rear if queue wasn''t empty
         case 4:
-            dequeueRear(q);
+            number = dequeueRear(q);
             if (number != -1)
             {
-                cout << "Dequeued element : " << number;
+                fout << "Dequeued (rear) : " << number;
             }
             else
             {
-                cout << "Dequeue is empty.";
+                fout << "Dequeue is empty.";
             }
             break;
 
         default:
-            continue;
+            fout << "Not a valid option.";
         }
-
-        // ask the user whether s/he want to continue
-        cout << "\nDo you want to continue? 0(for no) 1 or any other(for yes) : ";
-        cin >> choice;
-
-        if (!choice)
-        {
-            break;
-        }
+        fout << endl;
     }
 
+    fin.close();
+    cout << "\nRead from file '214161008_q05_a_input.txt'.";
+    fout.close();
+    cout << "\nWritten to file '214161008_q05_a_input.txt'.";
+}
+
+// main function execution begins here
+int main()
+{
+    readFile();
+    cout << endl;
     return 0;
 }
