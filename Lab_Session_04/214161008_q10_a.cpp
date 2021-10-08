@@ -157,7 +157,7 @@ void swap(struct Process &p, struct Process &q)
 void writeToFile(struct Process p[], struct Process copyProcess[], int number_of_processes)
 {
     ofstream fout;
-    fout.open("214161008_q10a_output.txt");
+    fout.open("214161008_q10_a_output.txt");
 
     // to store total waiting time and total turn around time
     int total_waiting_time = 0;
@@ -196,7 +196,7 @@ void writeToFile(struct Process p[], struct Process copyProcess[], int number_of
     fout << "\nW.T. : Waiting Time";
     fout << "\nR.T. : Response Time";
     fout.close();
-    cout << "\nWritten to file '214161008_q10a_output.txt' ";
+    cout << "\nWritten to file '214161008_q10_a_output.txt' ";
 }
 
 // returns the index matching with copyProcess processID
@@ -215,7 +215,7 @@ int findMatchingIndex(struct Process p[], int process_id, int number_of_processe
 void readFile()
 {
     ifstream fin;
-    fin.open("214161008_q10a_input.txt");
+    fin.open("214161008_q10_a_input.txt");
 
     string line;
 
@@ -245,7 +245,7 @@ void readFile()
         number_of_processes++;
     }
     fin.close();
-    cout << "\nRead from file '214161008_q10a_input.txt' ";
+    cout << "\nRead from file '214161008_q10_a_input.txt' ";
 
     // make a copy of orignal Processes
     struct Process copyProcess[number_of_processes];
