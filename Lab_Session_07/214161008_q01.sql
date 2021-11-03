@@ -95,6 +95,8 @@ insert into certified (aircraft_id, employee_id) values (5, 3);
 insert into certified (aircraft_id, employee_id) values (2, 9);
 insert into certified (aircraft_id, employee_id) values (6, 8);
 insert into certified (aircraft_id, employee_id) values (7, 8);
+insert into certified (aircraft_id, employee_id) values (5, 4);
+insert into certified (aircraft_id, employee_id) values (4, 6);
 
 -- Insertion into Flight table
 insert into flight (flight_number, flight_from, flight_to, distance, departs, arrives, price_in_USD, aircraft_id) values (24, 'Los Angeles', 'Honolulu', 1500, '08:00:00', '12:00:00', 40000, 7);
@@ -229,17 +231,29 @@ where aircraft_id in
 -- (VII) Identify the routes that can be piloted by every pilot who makes more than $100,000.
 -- Done
 
-select distinct flight_from, flight_to
-from flight
-where aircraft_id in 
+select F.flight_from as source, F.flight_to as destination
+from flight F
+where F.aircraft_id in 
 (
     select aircraft_id
-    from certified
-    where employee_id in 
+    from aircraft A
+    where not exists
     (
-        select employee_id
-        from employee
-        where salary_in_USD > 100000
+        select *
+        from employee E
+        where salary_in_USD > 100000 
+        and exists 
+        (
+            select *
+            from certified C
+            where C.employee_id = E.employee_id 
+        )
+        and not exists 
+        (
+            select *
+            from certified D
+            where D.employee_id = E.employee_id and D.aircraft_id = A.aircraft_id
+        )
     )
 );
 
@@ -269,7 +283,7 @@ where employee_id in
             where aircraft_name = 'Boeing'
         )
     )
-)
+);
 
 -- (IX) A customer wants to travel from Madison to New York with no more than two changes of flight. List the choice of departure times from Madison if the customer
 -- wants to arrive in New York by 6 p.m.
@@ -417,21 +431,5 @@ exists
         select employee_id
         from aircraft A
         where  A.aircraft_id = R.aircraft_id and A.aircraft_name = 'Boeing'
-    )
-);
-
--- Testing Phase
-
-select distinct K.sid
-from supplier K
-where not exists
-(
-    select *
-    from parts P
-    where not exists
-    (
-        select pid 
-        from supplier S
-        where S.sid = K.sid and P.pid = S.pid
     )
 );
